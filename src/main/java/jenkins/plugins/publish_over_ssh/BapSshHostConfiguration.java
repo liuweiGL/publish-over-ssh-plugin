@@ -34,6 +34,7 @@ import java.util.Objects;
 import java.util.Properties;
 
 import hudson.util.Secret;
+import java.util.UUID;
 import jenkins.model.Jenkins;
 import jenkins.plugins.publish_over.*;
 import jenkins.plugins.publish_over_ssh.descriptor.BapSshHostConfigurationDescriptor;
@@ -64,9 +65,10 @@ public class BapSshHostConfiguration extends BPHostConfiguration<BapSshClient, B
 
     public static final boolean DEFAULT_AVOID_SAME_FILES_UPLOAD = false;
 
-    private int timeout;
-    private boolean overrideKey;
-    private boolean disableExec;
+  private String id;
+  private int timeout;
+  private boolean overrideKey;
+  private boolean disableExec;
 
     private final BapSshKeyInfo keyInfo;
     private String jumpHost;
@@ -82,39 +84,41 @@ public class BapSshHostConfiguration extends BPHostConfiguration<BapSshClient, B
 
     private boolean avoidSameFileUploads;
 
-    public BapSshHostConfiguration() {
-        // use this constructor instead of the default w/o parameters because there is some
-        // business logic in there...
-        super(null, null, null, null, null, 0);
-        this.keyInfo = new BapSshKeyInfo(null, null, null);
-    }
+  public BapSshHostConfiguration() {
+    // use this constructor instead of the default w/o parameters because there is some
+    // business logic in there...
+    super(null, null, null, null, null, 0);
+    this.id = UUID.randomUUID().toString();
+    this.keyInfo = new BapSshKeyInfo(null, null, null);
+  }
 
-    // CSOFF: ParameterNumberCheck
-    @SuppressWarnings("PMD.ExcessiveParameterList") // DBC for you!
-    @DataBoundConstructor
-    public BapSshHostConfiguration(final String name, final String hostname, final String username, final String encryptedPassword,
-                                   final String remoteRootDir, final int port, final int timeout, final boolean overrideKey, final String keyPath,
-                                   final String key, final boolean disableExec, final boolean avoidSameFileUploads,
-                                   final String proxyHost, final int proxyPort, final String proxyUser, final String secretProxyPassword, final String proxyType) {
-        // CSON: ParameterNumberCheck
-        super(name, hostname, username, null, remoteRootDir, port);
-        this.timeout = timeout;
-        this.overrideKey = overrideKey;
-        this.keyInfo = new BapSshKeyInfo(encryptedPassword, key, keyPath);
-        this.disableExec = disableExec;
-        this.avoidSameFileUploads = avoidSameFileUploads;
-        this.proxyHost = proxyHost;
-        this.proxyPort = proxyPort;
-        this.proxyUser = proxyUser;
-        this.proxyType = proxyType;
-        this.secretProxyPassword = Secret.fromString(secretProxyPassword);
-        this.proxyPassword = secretProxyPassword;
-    }
+  // CSOFF: ParameterNumberCheck
+  @SuppressWarnings("PMD.ExcessiveParameterList") // DBC for you!
+  @DataBoundConstructor
+  public BapSshHostConfiguration(final String id, final String name, final String hostname,
+    final String username,
+    final String encryptedPassword,
+    final String remoteRootDir, final int port, final int timeout, final boolean overrideKey,
+    final String keyPath,
+    final String key, final boolean disableExec, final boolean avoidSameFileUploads) {
+    // CSON: ParameterNumberCheck
+    super(name, hostname, username, null, remoteRootDir, port);
+    this.id = StringUtils.isEmpty(id) ? UUID.randomUUID().toString() : id;
+    this.timeout = timeout;
+    this.overrideKey = overrideKey;
+    this.keyInfo = new BapSshKeyInfo(encryptedPassword, key, keyPath);
+    this.disableExec = disableExec;
+    this.avoidSameFileUploads = avoidSameFileUploads;
+  }
 
-    @DataBoundSetter
-    public void setJumpHost(final String jumpHost) {
-        this.jumpHost = jumpHost;
-    }
+  public String getId() {
+    return id;
+  }
+
+  @DataBoundSetter
+  public void setJumpHost(final String jumpHost) {
+    this.jumpHost = jumpHost;
+  }
 
     public String getJumpHost() {
         return jumpHost;
