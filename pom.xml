@@ -36,7 +36,7 @@
   <properties>
     <revision>1.26</revision>
     <changelist>-SNAPSHOT</changelist>
-    <gitHubRepo>jenkinsci/${project.artifactId}-plugin</gitHubRepo>
+    <gitHubRepo>liuweiGL/${project.artifactId}-plugin</gitHubRepo>
     <jenkins.version>2.434</jenkins.version>
   </properties>
 
@@ -57,10 +57,10 @@
 
   <developers>
     <developer>
-      <id>slide_o_mix</id>
-      <name>slide</name>
-      <timezone>-7</timezone>
-      <email>slide.o.mix@gmail.com</email>
+      <id>liuweiGL</id>
+      <name>liuweiGL</name>
+      <timezone>+8</timezone>
+      <email>wei2460@qq.com</email>
     </developer>
   </developers>
 
