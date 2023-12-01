@@ -36,7 +36,7 @@
   <properties>
     <revision>1.26</revision>
     <changelist>-SNAPSHOT</changelist>
-    <gitHubRepo>liuweiGL/${project.artifactId}-plugin</gitHubRepo>
+    <gitHubRepo>jenkinsci/${project.artifactId}-plugin</gitHubRepo>
     <jenkins.version>2.434</jenkins.version>
   </properties>
 
@@ -57,10 +57,10 @@
 
   <developers>
     <developer>
-      <id>liuweiGL</id>
-      <name>liuweiGL</name>
-      <timezone>+8</timezone>
-      <email>wei2460@qq.com</email>
+      <id>slide_o_mix</id>
+      <name>slide</name>
+      <timezone>-7</timezone>
+      <email>slide.o.mix@gmail.com</email>
     </developer>
   </developers>
 
@@ -115,7 +115,7 @@
 
   <scm>
     <url>https://github.com/${gitHubRepo}</url>
-    <connection>scm:git:git@github.com:${gitHubRepo}.git</connection>
+    <connection>scm:git:https://github.com/${gitHubRepo}.git</connection>
     <developerConnection>scm:git:git@github.com:${gitHubRepo}.git</developerConnection>
     <tag>${scmTag}</tag>
   </scm>
